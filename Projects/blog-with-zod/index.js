@@ -50,7 +50,6 @@ app.get("/posts", (req, res) => {
   return res.status(200).json(blogsList);
 });
 
-// app.get("");
 
 app.post("/posts", validatePost, (req, res) => {
   const validatedPostData = req.validatePostData;
@@ -63,6 +62,9 @@ app.post("/posts", validatePost, (req, res) => {
     postId: uniqueId,
     ...validatedPostData,
   };
+
+  blogsList.push(newPost);
+
   res.status(200).json({
     message: "Post add successfully",
     post: newPost,
