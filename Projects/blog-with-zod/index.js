@@ -49,4 +49,11 @@ app.get("/posts", (req, res) => {
   return res.status(200).json(blogsList);
 });
 
+app.post("/posts", validatePost, (req, res) => {
+  const validatedPostData = req.validatePostData;
+  res.status(200).json({
+    message: "Post add successfully",
+    post: validatedPostData,
+  });
+});
 app.listen(3000);
