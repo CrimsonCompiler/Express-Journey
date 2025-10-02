@@ -50,6 +50,21 @@ app.get("/posts", (req, res) => {
   return res.status(200).json(blogsList);
 });
 
+app.get("/posts/:postId", (req, res) => {
+  const postId = String(req.params.postId);
+
+  const resultData = blogsList.find((post) => post.postId === postId);
+
+  if (!resultData) {
+    res.status(404).json({
+      message: "Post not found",
+    });
+  }
+
+  res.status(200).json({
+    post: resultData,
+  });
+});
 
 app.post("/posts", validatePost, (req, res) => {
   const validatedPostData = req.validatePostData;
