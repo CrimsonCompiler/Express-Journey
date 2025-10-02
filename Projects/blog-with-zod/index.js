@@ -1,5 +1,6 @@
 const express = require("express");
 const { z } = require("zod");
+const uuid = require("uuid");
 
 const app = express();
 
@@ -49,11 +50,22 @@ app.get("/posts", (req, res) => {
   return res.status(200).json(blogsList);
 });
 
+// app.get("");
+
 app.post("/posts", validatePost, (req, res) => {
   const validatedPostData = req.validatePostData;
+
+  // generating a new id for a specific post
+  const uniqueId = uuid.v4();
+
+  // creating a newPost with the uniqueId
+  const newPost = {
+    postId: uniqueId,
+    ...validatedPostData,
+  };
   res.status(200).json({
     message: "Post add successfully",
-    post: validatedPostData,
+    post: newPost,
   });
 });
 app.listen(3000);
