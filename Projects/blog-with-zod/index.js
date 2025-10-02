@@ -20,14 +20,7 @@ const BLOGSCHEMA = z
   .strict();
 
 // BLOGS LIST []
-let blogsList = [
-  {
-    title: "Learning About Redux in React",
-    content: "Redux is not just a state management it is a beast !",
-    authorEmail: "tousif2567@gmail.com",
-    tags: ["React", "Redux", "Web Development"],
-  },
-];
+let blogsList = [];
 
 app.get("/posts", (req, res) => {
   if (blogsList.length === 0) {
