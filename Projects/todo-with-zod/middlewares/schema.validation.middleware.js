@@ -11,7 +11,7 @@ function todoValidation(req, res, next) {
     }));
 
     return res.status(422).json({
-      message: "Todo not added",
+      message: "Todo add failed",
       errors,
     });
   }
