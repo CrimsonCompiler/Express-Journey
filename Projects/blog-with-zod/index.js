@@ -125,4 +125,21 @@ app.put("/posts/:postId", validateUpdatePostData, (req, res) => {
   });
 });
 
+app.delete("/posts/:postId", (req, res) => {
+  const postId = req.params.postId;
+
+  const resultData = blogsList.some((post) => post.postId === postId);
+
+  if (!resultData) {
+    res.status(404).json({
+      message: "Post not found",
+    });
+  }
+
+  blogsList = blogsList.filter((post) => post.postId !== postId);
+  res.status(200).json({
+    message: "Post deleted successfully",
+  });
+});
+
 app.listen(3000);
