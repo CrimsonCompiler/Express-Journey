@@ -20,6 +20,8 @@ const BLOGSCHEMA = z
   })
   .strict();
 
+const updateBlogPostSchema = BLOGSCHEMA.partial();
+
 // Custom middleware made by me
 function validatePost(req, res, next) {
   const resultData = BLOGSCHEMA.safeParse(req.body);
@@ -41,7 +43,7 @@ function validatePost(req, res, next) {
 }
 
 function validateUpdatePostData(req, res, next) {
-  const resultData = BLOGSCHEMA.safeParse(req.body);
+  const resultData = updateBlogPostSchema.safeParse(req.body);
 
   if (!resultData.success) {
     const errors = resultData.error.issues.map((err) => ({
