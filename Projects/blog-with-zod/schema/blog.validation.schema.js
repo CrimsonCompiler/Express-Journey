@@ -15,3 +15,5 @@ const BLOGSCHEMA = z
   .strict();
 
 const updateBlogPostSchema = BLOGSCHEMA.partial();
+
+module.exports = { BLOGSCHEMA, updateBlogPostSchema };
