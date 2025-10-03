@@ -103,4 +103,26 @@ app.post("/posts", validatePost, (req, res) => {
     post: newPost,
   });
 });
+
+app.put("/posts/:postId", validateUpdatePostData, (req, res) => {
+  const postId = req.params.postId;
+
+  const validatedPostData = req.validatePostData;
+  const postFoundIndex = blogsList.findIndex((post) => post.postId === postId);
+
+  if (postFoundIndex === -1) {
+    res.status(404).json({
+      message: "Post not found",
+    });
+  }
+
+  const updatePost = { ...blogsList[postFoundIndex], ...validatedPostData };
+  blogsList[postFoundIndex] = updatePost;
+
+  res.status(200).json({
+    message: "Post updated successfully",
+    post: updatePost,
+  });
+});
+
 app.listen(3000);
