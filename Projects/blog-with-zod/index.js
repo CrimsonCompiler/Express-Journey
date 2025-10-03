@@ -30,7 +30,7 @@ function validatePost(req, res, next) {
       message: err.message,
     }));
 
-    res.status(422).json({
+    return res.status(422).json({
       message: "Post add failed",
       errors,
     });
@@ -74,12 +74,12 @@ app.get("/posts/:postId", (req, res) => {
   const resultData = blogsList.find((post) => post.postId === postId);
 
   if (!resultData) {
-    res.status(404).json({
+    return res.status(404).json({
       message: "Post not found",
     });
   }
 
-  res.status(200).json({
+  return res.status(200).json({
     post: resultData,
   });
 });
@@ -111,7 +111,7 @@ app.put("/posts/:postId", validateUpdatePostData, (req, res) => {
   const postFoundIndex = blogsList.findIndex((post) => post.postId === postId);
 
   if (postFoundIndex === -1) {
-    res.status(404).json({
+    return res.status(404).json({
       message: "Post not found",
     });
   }
@@ -119,7 +119,7 @@ app.put("/posts/:postId", validateUpdatePostData, (req, res) => {
   const updatePost = { ...blogsList[postFoundIndex], ...validatedPostData };
   blogsList[postFoundIndex] = updatePost;
 
-  res.status(200).json({
+  return res.status(200).json({
     message: "Post updated successfully",
     post: updatePost,
   });
@@ -131,13 +131,13 @@ app.delete("/posts/:postId", (req, res) => {
   const resultData = blogsList.some((post) => post.postId === postId);
 
   if (!resultData) {
-    res.status(404).json({
+    return res.status(404).json({
       message: "Post not found",
     });
   }
 
   blogsList = blogsList.filter((post) => post.postId !== postId);
-  res.status(200).json({
+  return res.status(200).json({
     message: "Post deleted successfully",
   });
 });
