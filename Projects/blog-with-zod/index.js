@@ -1,26 +1,10 @@
 const express = require("express");
-const { z } = require("zod");
 const uuid = require("uuid");
 
 const app = express();
 
 app.use(express.json());
 
-// BLOG SCHEMA
-
-const BLOGSCHEMA = z
-  .object({
-    title: z
-      .string()
-      .min(5, "Title is too short")
-      .max(100, "Title is too long"),
-    content: z.string().min(20, "Content must be at least 20 characters"),
-    authorEmail: z.string().email("Invalid email format"),
-    tags: z.array(z.string()).optional(),
-  })
-  .strict();
-
-const updateBlogPostSchema = BLOGSCHEMA.partial();
 
 // Custom middleware made by me
 function validatePost(req, res, next) {
