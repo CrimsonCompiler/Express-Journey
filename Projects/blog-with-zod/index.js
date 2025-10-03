@@ -25,4 +25,8 @@ app.put("/posts/:postId", validateUpdatePostData, updateBlogPost);
 
 app.delete("/posts/:postId", deleteBlogPost);
 
-app.listen(3000);
+if (require.main === module) {
+  app.listen(3000, () => console.log("Server running on port 3000"));
+}
+
+module.exports = { app };
