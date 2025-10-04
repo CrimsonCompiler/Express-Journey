@@ -41,8 +41,8 @@ const postBlogPost = (req, res) => {
 
   blogsList.push(newPost);
 
-  res.status(200).json({
-    message: "Post add successfully",
+  res.status(201).json({
+    message: "Post created successfully",
     post: newPost,
   });
 };
@@ -79,8 +79,8 @@ const deleteBlogPost = (req, res) => {
     });
   }
 
-  blogsList = blogsList.filter((post) => post.postId !== postId);
-  return res.status(200).json({
+  blogsList.splice(postId, 1);
+  return res.status(204).json({
     message: "Post deleted successfully",
   });
 };
@@ -91,4 +91,5 @@ module.exports = {
   postBlogPost,
   updateBlogPost,
   deleteBlogPost,
+  blogsList,
 };

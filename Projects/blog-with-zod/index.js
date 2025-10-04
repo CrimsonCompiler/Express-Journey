@@ -21,7 +21,7 @@ app.get("/posts/:postId", fetchBlogPostById);
 
 app.post("/posts", validatePost, postBlogPost);
 
-app.put("/posts/:postId", validateUpdatePostData, updateBlogPost);
+app.patch("/posts/:postId", validateUpdatePostData, updateBlogPost);
 
 app.delete("/posts/:postId", deleteBlogPost);
 

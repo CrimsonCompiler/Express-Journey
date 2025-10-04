@@ -3,7 +3,6 @@ const {
   updateBlogPostSchema,
 } = require("../schema/blog.validation.schema");
 
-
 // Custom middleware made by me
 function validatePost(req, res, next) {
   const resultData = BLOGSCHEMA.safeParse(req.body);
@@ -30,7 +29,7 @@ function validateUpdatePostData(req, res, next) {
   if (!resultData.success) {
     const errors = resultData.error.issues.map((err) => ({
       field: err.path.join("."),
-      message: err.message,
+      errors,
     }));
 
     return res.status(422).json({
