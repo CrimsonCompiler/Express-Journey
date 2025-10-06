@@ -1,0 +1,26 @@
+{
+  "query": "query getOrganicListing($input: RLPInput!) { rlp(params: $input) { organic_listing { views { items { id name rating review_number distance latitude longitude hero_listing_image minimum_order_amount minimum_delivery_fee delivery_duration_range { lower_limit_in_minutes upper_limit_in_minutes } } } } } }",
+  "variables": {
+    "input": {
+      "latitude": 23.7886,
+      "longitude": 90.41647,
+      "locale": "en_BD",
+      "language_id": "1",
+      "customer_id": "",
+      "customer_type": "REGULAR",
+      "expedition_type": "DELIVERY",
+      "organic_listing": {
+        "views": [
+          {
+            "limit": 50,
+            "offset": 0,
+            "configuration": "Original",
+            "use_free_delivery_label": true,
+            "ncr_place": "list",
+            "ncr_screen": "shop_list"
+          }
+        ]
+      }
+    }
+  }
+}
