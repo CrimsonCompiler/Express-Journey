@@ -7,8 +7,14 @@ app.use(express.json());
 app.use(cors());
 
 app.post("/api/restaurants", async (req, res) => {
+  console.log(req.body);
+  const lat = req.body.latitude;
+  const long = req.body.longitude;
   try {
-    const payload = payloadData;
+    const dynamicPayload = JSON.parse(JSON.stringify(payloadData));
+
+    dynamicPayload.variables.input.latitude = lat;
+    dynamicPayload.variables.input.longitude = long;
 
     const response = await fetch("https://bd.fd-api.com/rlp-service/query", {
       method: "POST",
@@ -20,7 +26,7 @@ app.post("/api/restaurants", async (req, res) => {
         "User-Agent":
           "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36",
       },
-      body: JSON.stringify(payload),
+      body: JSON.stringify(dynamicPayload),
     });
 
     const data = await response.json();
