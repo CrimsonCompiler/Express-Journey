@@ -30,10 +30,11 @@ const loginController = (req, res) => {
     const newUser = req.validatedUserData;
 
     try{
-
+       const { email } = newUser;
     }catch(err){
       
     }
 };
 
 module.exports = registerController;
+
